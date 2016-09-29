@@ -16,7 +16,7 @@ Bu dökümanın amacı Swift programlama dilinde uygulama geliştirme prensipler
   * [Protocol Conformance](#protocol-conformance)
   * [Unused Code](#unused-code)
   * [Minimal Imports](#minimal-imports)
-* [Spacing](#spacing)
+* [Boşluklar](#boşluklar)
 * [Comments](#comments)
 * [Classes and Structures](#classes-and-structures)
   * [Use of Self](#use-of-self)
@@ -78,13 +78,13 @@ class app_widgetContainer {
 
 Abbreviations and acronyms should generally be avoided. Following the [API Design Guidelines](https://swift.org/documentation/api-design-guidelines/#follow-case-conventions), abbreviations and initialisms that appear in all uppercase should be uniformly uppercase or lowercase. Examples:
 
-**Preferred**
+**Tercih Edilen**
 ```swift
 let urlString: URLString
 let userID: UserID
 ```
 
-**Not Preferred**
+**Tercih Edilmeyen**
 ```swift
 let uRLString: UrlString
 let userId: UserId
@@ -160,12 +160,12 @@ let myClass = MyModule.UsefulClass()
 
 Selectors are Obj-C methods that act as handlers for many Cocoa and Cocoa Touch APIs. Prior to Swift 2.2, they were specified using type unsafe strings. This now causes a compiler warning. The "Fix it" button replaces these strings with the **fully qualified** type safe selector. Often, however, you can use context to shorten the expression. This is the preferred style.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 let sel = #selector(viewDidLoad)
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let sel = #selector(ViewController.viewDidLoad)
 ```
@@ -174,14 +174,14 @@ let sel = #selector(ViewController.viewDidLoad)
 
 Generic type parameters should be descriptive, upper camel case names. When a type name doesn't have a meaningful relationship or role, use a traditional single uppercase letter such as `T`, `U`, or `V`.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 struct Stack<Element> { ... }
 func writeTo<Target: OutputStream>(inout target: Target)
 func max<T: Comparable>(x: T, _ y: T) -> T
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 struct Stack<T> { ... }
 func writeTo<target: OutputStream>(inout t: target)
@@ -192,12 +192,12 @@ func max<Thing: Comparable>(x: Thing, _ y: Thing) -> Thing
 
 Use US English spelling to match Apple's API.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 let color = "red"
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let colour = "red"
 ```
@@ -210,7 +210,7 @@ Use extensions to organize your code into logical blocks of functionality. Each 
 
  In particular, when adding protocol conformance to a model, prefer adding a separate extension for the protocol methods. This keeps the related methods grouped together with the protocol and can simplify instructions to add a protocol to a class with its associated methods.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 class MyViewcontroller: UIViewController {
   // class stuff here
@@ -227,7 +227,7 @@ extension MyViewcontroller: UIScrollViewDelegate {
 }
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
   // all methods
@@ -244,7 +244,7 @@ Unused (dead) code, including Xcode template code and placeholder comments shoul
 
 Aspirational methods not directly associated with the tutorial whose implementation simply calls the super class should also be removed. This includes any empty/unused UIApplicationDelegate methods.
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 override func didReceiveMemoryWarning() {
    super.didReceiveMemoryWarning()
@@ -263,28 +263,23 @@ override func tableView(tableView: UITableView, numberOfRowsInSection section: I
 
 ```
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
   return Database.contacts.count
 }
 ```
 ### Minimal Imports
+`Foundation` import edildiğinde, `UIKit` in import edilmesine gerek kalmayacaktır. 
 
-Keep imports minimal. For example, don't import `UIKit` when importing `Foundation` will suffice.
+## Boşluklar
 
-## Spacing
+* Method parantezleri ve diğer parantezler (`if`/`else`/`switch`/`while` vs.) her zaman ifade ile aynı satırda açık olur fakat yeni bir satırda kapatılır.
 
-* Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings as shown below:
 
-  ![Xcode indent settings](screens/indentation.png)
-  
-  ![Xcode Project settings](screens/project_settings.png)
+* İpucu: Kod satırında istediğiniz kısımları (veya hepsi için ⌘A) seçerek Control-I ile düzenleme yapabilirsiniz. Sabit olarak  boşluklar(4-Space) ayarlıdır.
 
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
-* Tip: You can re-indent by selecting some code (or ⌘A to select all) and then Control-I (or Editor\Structure\Re-Indent in the menu). Some of the Xcode template code will have 4-space tabs hard coded, so this is a good way to fix that.
-
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 if user.isHappy {
   // Do something
@@ -293,7 +288,7 @@ if user.isHappy {
 }
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 if user.isHappy
 {
@@ -308,14 +303,14 @@ else {
 
 * Colons always have no space on the left and one space on the right. Exceptions are the ternary operator `? :` and empty dictionary `[:]`.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 class TestDatabase: Database {
   var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
 }
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 class TestDatabase : Database {
   var data :[String:CGFloat] = ["A" : 1.2, "B":3.2]
@@ -413,14 +408,14 @@ class BoardLocation {
 
 For conciseness, if a computed property is read-only, omit the get clause. The get clause is required only when a set clause is provided.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 var diameter: Double {
   return radius * 2
 }
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 var diameter: Double {
   get {
@@ -466,7 +461,7 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 
 Use trailing closure syntax only if there's a single closure expression parameter at the end of the argument list. Give the closure parameters descriptive names.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 UIView.animateWithDuration(1.0) {
   self.myView.alpha = 0
@@ -482,7 +477,7 @@ UIView.animateWithDuration(1.0,
 )
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 UIView.animateWithDuration(1.0, animations: {
   self.myView.alpha = 0
@@ -519,13 +514,13 @@ let value = numbers
 
 Always use Swift's native types when available. Swift offers bridging to Objective-C so you can still use the full set of methods as needed.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 let width = 120.0                                    // Double
 let widthString = (width as NSNumber).stringValue    // String
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let width: NSNumber = 120.0                          // NSNumber
 let widthString: NSString = width.stringValue        // NSString
@@ -541,7 +536,7 @@ Constants are defined using the `let` keyword, and variables with the `var` keyw
 
 You can define constants on a type rather than an instance of that type using type properties. To declare a type property as a constant simply use `static let`. Type properties declared in this way are generally preferred over global constants because they are easier to distinguish from instance properties. Example:
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 enum Math {
   static let e  = 2.718281828459045235360287
@@ -553,7 +548,7 @@ radius * Math.pi * 2 // circumference
 ```
 **Note:** The advantage of using a case-less enumeration is that it can't accidentally be instantiated and works as a pure namespace.
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let e  = 2.718281828459045235360287  // pollutes global namespace
 let pi = 3.141592653589793238462643
@@ -589,7 +584,7 @@ When naming optional variables and properties, avoid naming them like `optionalS
 
 For optional binding, shadow the original name when appropriate rather than using names like `unwrappedView` or `actualLabel`.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 var subview: UIView?
 var volume: Double?
@@ -616,13 +611,13 @@ if let unwrappedSubview = optionalSubview {
 
 Use the native Swift struct initializers rather than the legacy CGGeometry constructors.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 let bounds = CGRect(x: 40, y: 20, width: 120, height: 80)
 let centerPoint = CGPoint(x: 96, y: 42)
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let bounds = CGRectMake(40, 20, 120, 80)
 let centerPoint = CGPointMake(96, 42)
@@ -656,7 +651,7 @@ private func makeLocationManager() -> CLLocationManager {
 
 Prefer compact code and let the compiler infer the type for constants or variables of single instances. Type inference is also appropriate for small (non-empty) arrays and dictionaries. When required, specify the specific type such as `CGFloat` or `Int16`.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 let message = "Click the button"
 let currentBounds = computeViewBounds()
@@ -664,7 +659,7 @@ var names = ["Mic", "Sam", "Christine"]
 let maximumWidth: CGFloat = 106.5
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let message: String = "Click the button"
 let currentBounds: CGRect = computeViewBounds()
@@ -675,13 +670,13 @@ let names = [String]()
 
 For empty arrays and dictionaries, use type annotation. (For an array or dictionary assigned to a large, multi-line literal, use type annotation.)
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 var names: [String] = []
 var lookup: [String: Int] = [:]
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 var names = [String]()
 var lookup = [String: Int]()
@@ -694,14 +689,14 @@ var lookup = [String: Int]()
 
 Prefer the shortcut versions of type declarations over the full generics syntax.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 var deviceModels: [String]
 var employees: [Int: String]
 var faxNumber: Int?
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 var deviceModels: Array<String>
 var employees: Dictionary<Int, String>
@@ -714,13 +709,13 @@ Free functions, which aren't attached to a class or type, should be used sparing
 
 Free functions are most appropriate when they aren't associated with any particular type or instance.
 
-**Preferred**
+**Tercih Edilen**
 ```swift
 let sorted = items.mergeSort()  // easily discoverable
 rocket.launch()  // clearly acts on the model
 ```
 
-**Not Preferred**
+**Tercih Edilmeyen**
 ```swift
 let sorted = mergeSort(items)  // hard to discover
 launch(&rocket)
@@ -740,7 +735,7 @@ Code (even non-production, tutorial demo code) should not create reference cycle
 
 Extend object lifetime using the `[weak self]` and `guard let strongSelf = self else { return }` idiom. `[weak self]` is preferred to `[unowned self]` where it is not immediately obvious that `self` outlives the closure. Explicitly extending lifetime is preferred to optional unwrapping.
 
-**Preferred**
+**Tercih Edilen**
 ```swift
 resource.request().onComplete { [weak self] response in
   guard let strongSelf = self else { return }
@@ -749,7 +744,7 @@ resource.request().onComplete { [weak self] response in
 }
 ```
 
-**Not Preferred**
+**Tercih Edilmeyen**
 ```swift
 // might crash if self is released before response returns
 resource.request().onComplete { [unowned self] response in
@@ -772,7 +767,7 @@ resource.request().onComplete { [weak self] response in
 
 `while-condition-increment` yerine `for-in` ve `for` tercih edilmelidir.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 for _ in 0..<3 {
   print("Hello three times")
@@ -791,7 +786,7 @@ for index in (0...3).reverse() {
 }
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 var i = 0
 while i < 3 {
@@ -812,12 +807,12 @@ while i < attendeeList.count {
 
 Tek satıra birden fazla komut yazılmamalıdır ve komut satırlarının sonuna noktalı virgül eklenmemelidir.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 let swift = "not a scripting language"
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 let swift = "not a scripting language";
 ```
@@ -826,14 +821,14 @@ let swift = "not a scripting language";
 
 Koşul ifadelerinde parantezlere gerekli değildir ve kaldırılmalıdır.
 
-**Preferred:**
+**Tercih Edilen:**
 ```swift
 if name == "Hello" {
   print("World")
 }
 ```
 
-**Not Preferred:**
+**Tercih Edilmeyen:**
 ```swift
 if (name == "Hello") {
   print("World")
